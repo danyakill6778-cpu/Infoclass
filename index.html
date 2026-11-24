@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#172d4c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="InfoClass">
+<link rel="manifest" href="manifest.json">
+<title>InfoClass</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef2f7;color:#17243a;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.app{max-width:480px;min-height:100dvh;margin:auto;background:#f7f9fc;display:flex;flex-direction:column;box-shadow:0 0 35px #15274412}
+.top{height:68px;background:#172d4c;color:white;display:flex;align-items:center;padding:0 18px;gap:12px;position:sticky;top:0;z-index:2}
+.logo{height:42px;width:42px;border-radius:14px;background:#3979d8;display:grid;place-items:center;font-size:22px}
+.brand{font-size:19px;font-weight:800;letter-spacing:-.4px}.subtitle{font-size:11px;color:#b8c9df;margin-top:2px}
+.avatar{margin-left:auto;width:36px;height:36px;border-radius:50%;background:#2e496b;display:grid;place-items:center;font-weight:700}
+main{flex:1;padding:19px 16px 96px;overflow:auto}
+h1{font-size:26px;margin:2px 0 5px;letter-spacing:-.7px}h2{font-size:18px;margin:0 0 12px}.muted{color:#7a8799;font-size:13px}.hello{margin-bottom:20px}
+.hero{background:linear-gradient(135deg,#1d4777,#3979d8);color:white;border-radius:22px;padding:20px;margin-bottom:22px;box-shadow:0 9px 22px #3979d82b}
+.hero .eyebrow{font-size:10px;letter-spacing:1.2px;opacity:.8;font-weight:700}.hero h2{font-size:22px;margin:8px 0}.hero p{font-size:13px;line-height:1.5;color:#e4edfb;margin:0 0 15px}
+.btn{border:0;border-radius:12px;padding:12px 16px;font:600 14px inherit;background:#e8eff9;color:#234;cursor:pointer}.hero .btn{background:white;color:#214d82}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 10px}.section-head small{color:#3979d8;font-weight:700}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.tile{background:white;border:1px solid #e8edf4;border-radius:17px;padding:15px}.tile-icon{font-size:22px}.tile strong{display:block;font-size:24px;margin:7px 0 1px}.tile span{font-size:12px;color:#7a8799}
+.list{display:flex;flex-direction:column;gap:9px}
+.item{width:100%;display:flex;align-items:center;gap:12px;text-align:left;background:white;border:1px solid #e8edf4;border-radius:16px;padding:13px;color:#17243a;cursor:pointer}
+.item-icon{width:43px;height:43px;border-radius:13px;background:#edf3fb;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.item-info{flex:1;min-width:0}.item-info b{display:block;font-size:14px}.item-info small{display:block;color:#7a8799;font-size:11px;margin-top:4px;line-height:1.35}
+.arrow{color:#91a0b3;font-size:22px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:76px;padding:8px 9px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e8edf4;display:flex;justify-content:space-around;z-index:5}
+.tab{border:0;background:none;color:#8491a3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:65px;font-size:10px;font-weight:600;cursor:pointer}.tab .ico{font-size:21px}.tab.active{color:#3979d8}
+.panel{background:white;border:1px solid #e8edf4;border-radius:18px;padding:16px;margin:12px 0}
+.progress{height:8px;background:#e8eef6;border-radius:20px;overflow:hidden;margin:9px 0}.progress i{height:100%;display:block;background:#3979d8;border-radius:20px}
+.lesson-text{font-size:14px;line-height:1.65;color:#46556a}.tip{background:#edf4ff;border-radius:13px;padding:13px;font-size:13px;line-height:1.5;margin-top:14px}
+.option{display:block;width:100%;text-align:left;background:white;border:1px solid #e3eaf3;border-radius:13px;padding:14px;margin:9px 0;font-size:14px;color:#26364d}.option.selected{border:2px solid #3979d8;background:#f0f6ff}
+.primary{background:#3979d8;color:white;width:100%;border:0;border-radius:13px;padding:14px;font-weight:700;font-size:14px;margin-top:10px}
+.profile-head{text-align:center;padding:22px}.big-avatar{width:76px;height:76px;border-radius:26px;background:#e1edff;display:grid;place-items:center;font-size:34px;margin:0 auto 12px}
+@media(min-width:481px){body{padding:20px 0}.app{border-radius:26px;overflow:hidden;min-height:calc(100dvh - 40px)}.bottom{bottom:20px;border-radius:0 0 26px 26px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="logo">🎓</div><div><div class="brand">InfoClass</div><div class="subtitle">ТВОЯ УЧЕБНАЯ ПЛАТФОРМА</div></div><div class="avatar">7</div></header>
+<main id="screen"></main>
+<nav class="bottom">
+<button class="tab active" data-tab="home"><span class="ico">⌂</span>Главная</button>
+<button class="tab" data-tab="learn"><span class="ico">▤</span>Уроки</button>
+<button class="tab" data-tab="quiz"><span class="ico">✓</span>Тесты</button>
+<button class="tab" data-tab="profile"><span class="ico">◉</span>Профиль</button>
+</nav>
+</div>
+<script>
+const lessons=[
+{title:"Основы информации",desc:"Понятие, виды и свойства информации",icon:"📚",time:"10 мин",text:"Информация — это сведения об окружающем мире. Она бывает текстовой, числовой, графической и звуковой. Мы получаем её с помощью органов чувств и технических устройств.",tip:"Примеры информации: текст в учебнике, фотография, музыка, видео и числа."},
+{title:"Поиск в интернете",desc:"Поисковые системы и источники",icon:"🔎",time:"12 мин",text:"Для поиска информации используй точные ключевые слова. Сравнивай результаты из разных источников, обращай внимание на автора и дату публикации.",tip:"Не ограничивайся первым результатом поиска. Сравни несколько надёжных источников."},
+{title:"Безопасность в сети",desc:"Пароли и защита личных данных",icon:"🛡️",time:"15 мин",text:"Не передавай пароли другим людям. Используй сложные и разные пароли, не открывай подозрительные ссылки и защищай личные данные.",tip:"Не сообщай незнакомцам пароль, домашний адрес и другие личные сведения."},
+{title:"Медиаграмотность",desc:"Фейки и достоверность информации",icon:"📰",time:"12 мин",text:"Проверяй факты, автора публикации, дату и первоисточник. Не распространяй сомнительную информацию, пока не убедишься в её достоверности.",tip:"Если новость кажется удивительной, проверь её в нескольких надёжных источниках."}
+];
+let current="home",activeLesson=0,done=JSON.parse(localStorage.getItem("ic-done")||"[]"),answer=-1,checked=false;
+const screen=document.getElementById("screen");
+function nav(page){current=page;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===page));render()}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>nav(b.dataset.tab));
+function openLesson(i){activeLesson=i;nav("lesson")}
+function render(){
+if(current==="home")screen.innerHTML=`<div class="hello"><div class="muted">ПОНЕДЕЛЬНИК · ТВОЁ ОБУЧЕНИЕ</div><h1>Привет, ученик! 👋</h1><div class="muted">Готов узнать что-то новое сегодня?</div></div><section class="hero"><div class="eyebrow">ОБУЧАЮЩИЙ КУРС · 7 КЛАСС</div><h2>Информационная грамотность</h2><p>Учись безопасно пользоваться интернетом, искать информацию и отличать правду от фейков.</p><button class="btn" onclick="nav('learn')">Продолжить обучение →</button></section><div class="section-head"><h2>Мой прогресс</h2><small>${Math.round(done.length/4*100)}%</small></div><section class="panel"><div style="display:flex;justify-content:space-between;font-size:13px"><b>Завершено уроков</b><span>${done.length} из 4</span></div><div class="progress"><i style="width:${done.length*25}%"></i></div><div class="muted">Продолжай обучение, чтобы открыть все темы.</div></section><div class="section-head"><h2>Разделы курса</h2><small onclick="nav('learn')">Все уроки →</small></div><div class="list">${lessons.slice(0,3).map((l,i)=>`<button class="item" onclick="openLesson(${i})"><span class="item-icon">${l.icon}</span><span class="item-info"><b>${l.title}</b><small>${l.desc}</small></span><span class="arrow">${done.includes(i)?"✓":"›"}</span></button>`).join("")}</div>`;
+if(current==="learn")screen.innerHTML=`<div class="muted">ОБУЧЕНИЕ</div><h1>Мои уроки</h1><p class="muted">Выбери тему и изучи материал.</p><div class="list">${lessons.map((l,i)=>`<button class="item" onclick="openLesson(${i})"><span class="item-icon">${l.icon}</span><span class="item-info"><b>${i+1}. ${l.title}</b><small>${l.desc} · ${l.time}</small></span><span class="arrow">${done.includes(i)?"✓":"›"}</span></button>`).join("")}</div>`;
+if(current==="lesson"){let l=lessons[activeLesson];screen.innerHTML=`<button class="btn" onclick="nav('learn')">← Назад к урокам</button><div style="font-size:42px;margin:22px 0 8px">${l.icon}</div><div class="muted">УРОК ${activeLesson+1} ИЗ 4 · ${l.time.toUpperCase()}</div><h1>${l.title}</h1><section class="panel"><div class="lesson-text">${l.text}</div><div class="tip"><b>💡 Запомни</b><br>${l.tip}</div></section><button class="primary" onclick="finishLesson()">${done.includes(activeLesson)?"Урок уже завершён":"Отметить урок завершённым ✓"}</button>`}
+if(current==="quiz")screen.innerHTML=`<div class="muted">ПРОВЕРКА ЗНАНИЙ</div><h1>Мини-тест</h1><p class="muted">Проверь, как ты усвоил материал.</p><section class="panel"><div class="tag">ВОПРОС 1 ИЗ 1</div><h2 style="margin-top:14px">Что нужно сделать, если ты нашёл подозрительную информацию в интернете?</h2>${["Сразу поделиться с друзьями","Проверить её в нескольких источниках","Всегда считать её правдой"].map((x,i)=>`<button class="option ${answer===i?"selected":""}" onclick="pick(${i})">${x}</button>`).join("")}<button class="primary" onclick="check()" ${answer<0?"disabled":""}>Проверить ответ</button>${checked?`<div class="tip"><b>${answer===1?"✅ Верно!":"↻ Попробуй ещё раз"}</b><br>${answer===1?"Сравнение источников помогает определить достоверность информации.":"Важно проверить автора и подтверждения в других источниках."}</div>`:""}</section>`;
+if(current==="profile")screen.innerHTML=`<section class="panel profile-head"><div class="big-avatar">🎓</div><h2>Мой профиль</h2><div class="muted">Ученик · 7 класс</div></section><section class="panel"><h2>Статистика обучения</h2><div style="display:flex;justify-content:space-between;margin:14px 0"><span class="muted">Пройдено уроков</span><b>${done.length}/4</b></div><div class="progress"><i style="width:${done.length*25}%"></i></div><div style="display:flex;justify-content:space-between;margin:14px 0"><span class="muted">Осталось уроков</span><b>${4-done.length}</b></div></section><section class="panel"><b>О приложении</b><p class="muted">InfoClass — учебная платформа по информационной грамотности для 7 класса.</p><small class="muted">Версия 1.0</small></section>`;
+}
+function finishLesson(){if(!done.includes(activeLesson))done.push(activeLesson);localStorage.setItem("ic-done",JSON.stringify(done));render()}
+function pick(i){answer=i;checked=false;render()}
+function check(){checked=true;render()}
+render();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body>
+</html>
